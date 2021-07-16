@@ -1,0 +1,30 @@
+import sys
+import requests
+
+pokenumlist = [int(num) for num in input("Enter 6 Pokemon ID numbers between 1 and 151: ").split()]
+
+if len(pokenumlist) != 6:
+    print('Please ensure you enter 6 ID numbers, try again.')
+    sys.exit()
+
+else:
+    print('Your chosen IDs are: ', end=""), print(*pokenumlist)
+    print('See the text file for their moves')
+
+sys.stdout = open("pokemon.txt", "w")
+
+for pokemon_number in pokenumlist:
+    url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(pokemon_number)
+
+    response = requests.get(url)
+    pokemon = response.json()
+
+    print("==================================")
+    print(pokemon_number, 'is', pokemon['name'].upper(), 'and their moves are: ', '\n')
+
+    moves = pokemon['moves']
+
+    for move in moves:
+        print(move['move']['name'].capitalize())
+
+sys.stdout.close()
