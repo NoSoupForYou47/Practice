@@ -1,0 +1,31 @@
+import random
+
+my_ticket = [7, 11, 19, 29, 36, 40, 48]
+print('Your numbers are: ',end=""), print(*my_ticket)
+
+winning_nums = random.sample(range(1,51), 7)
+print('The winning numbers are: ',end=""), print(*sorted(winning_nums))
+
+matching_nums = set(my_ticket) & set(winning_nums)
+total_match = len(matching_nums)
+
+if matching_nums:
+    print('We have a match!')
+
+if total_match == 1:
+    print('One number, but no prize, sorry!')
+elif total_match == 2:
+    print('Two numbers, but no prize, sorry!')
+elif total_match == 3:
+    print('Three numbers, you win £20!')
+elif total_match == 4:
+    print('Four numbers, you win £40!')
+elif total_match == 5:
+    print('Five numbers, you win £100!')
+elif total_match == 6:
+    print('Six numbers, you win £10000!')
+elif total_match == 7:
+    print('Seven numbers, you win £1000000!')
+
+else:
+    print('No match, better luck next time!')
